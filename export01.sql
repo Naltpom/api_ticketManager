@@ -14,8 +14,8 @@
 
 
 -- Listage de la structure de la base pour mobads_fixtures
-CREATE DATABASE IF NOT EXISTS `mobads_fixtures` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `mobads_fixtures`;
+CREATE DATABASE IF NOT EXISTS `ticket_manager` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `ticket_manager`;
 
 -- Listage de la structure de la table mobads_fixtures. tm_application
 CREATE TABLE IF NOT EXISTS `tm_application` (
