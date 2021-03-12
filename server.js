@@ -18,19 +18,24 @@ mongoose
     user.save()
       .then(() => console.log('user enregistré !'))
       .catch(error => console.log('Objet error !'));
+    console.log(company);
     company.save()
       .then(() => {
         console.log('company enregistré !')
         application.save()
-        .then(() => {
-          console.log('application enregistré !')
-          console.log(
+          .then(() => {
+            console.log('application enregistré !')
             db.Application.find()
               .then(app => console.log(app))
-              .catch()
-            ); 
-        })
-        .catch(error => console.log('Objet error !'))
+              .catch(error => console.log('app list error !'))
+            db.User.find()
+              .then(app => console.log(app))
+              .catch(error => console.log('app list error !'))
+            db.Company.find()
+              .then(app => console.log(app))
+              .catch(error => console.log('app list error !'))
+          })
+          .catch(error => console.log('Objet error !'))
       })
       .catch(error => console.log('Objet error !'))
       console.log(application);
@@ -56,10 +61,7 @@ const company = new db.Company({
 });
 
 const application = new db.Application({
-  company_id: [db.Company.findOne({slug: 'slug'})
-                .then(thing => thing._id)
-                .catch(err => {err})]
-  ,
+  company_id: '604bf3db6e5c9e730e08ab38',
   name: 'name of the application'
 })
 
