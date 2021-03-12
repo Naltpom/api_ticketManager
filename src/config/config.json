@@ -1,0 +1,19 @@
+{
+    "env": {
+        "dev": {
+            "API_URL": "api.tm.localhost",
+            "FRONT_URL": "dashboard.tm.localhost",
+            "db": {
+                "username": "",
+                "password": ""
+            }
+        },
+        "test": {
+            "API_URL": "api.tm.localhost",
+            "FRONT_URL": "dashboard.tm.localhost"
+        },
+        "prod": {
+
+        }
+    }
+}
