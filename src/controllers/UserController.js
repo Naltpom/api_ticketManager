@@ -4,20 +4,20 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/UserModel');
 
 exports.createUser = (req, res, next) => {
-    const userObject = JSON.parse(req.body.user);
-    bcrypt.hash(req.body.password, 10)
+    const userObject = req.body.user;
+    bcrypt.hash(userObject.password, 10)
         .then(hash => {
             const user = new User({
-                email: req.body.email,
+                email: userObject.email,
                 password: hash,
-                family_name: req.body.family_name,
-                given_name: req.body.given_name,
-                token: req.body.token,
-                domain: req.body.domain,
-                roles: req.body.roles
+                family_name: userObject.family_name,
+                given_name: userObject.given_name,
+                token: userObject.token,
+                domain: userObject.domain,
+                roles: userObject.roles
             });
             user.save()
-                .then(() => res.status(201).json({ message: 'User crée !'}))
+                .then((user) => res.status(201).json({ message: 'User crée !', user: user}))
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }))
@@ -27,18 +27,42 @@ exports.createUser = (req, res, next) => {
 exports.modifyUser = (req, res, next) => {
     User.findOne({ _id: req.params.id })
         .then(user => {
-            User.updateOne({ _id: req.params.id }, { 
-                email: req.body.email,
-                password: req.body.password,
-                family_name: req.body.family_name,
-                given_name: req.body.given_name,
-                token: req.body.token,
-                domain: req.body.domain,
-                roles: req.body.roles, 
-                _id: req.params.id 
-            })
-                .then(() => res.status(200).json({message : 'User modifié'}))
-                .catch(error => res.status(400).json({ error }));
+            const userObject = req.body.user;
+            bcrypt.compare(userObject.password, user.password)
+                .then((valid) => {
+                    if (!valid) {
+                        console.log('not valid');
+                        var newPasssword = bcrypt.hash(userObject.password, 10).then(password => {
+                            User.updateOne({ _id: req.params.id }, { 
+                                email: userObject.email,
+                                password: password,
+                                family_name: userObject.family_name,
+                                given_name: userObject.given_name,
+                                token: userObject.token,
+                                domain: userObject.domain,
+                                roles: userObject.roles
+                            })
+                                .then((user) => res.status(200).json({message : 'User modifié', user: user}))
+                                .catch(error => res.status(400).json({ error }));
+                        }).catch(error => res.status(500).json({ error }))
+                        console.log(newPasssword);
+                    } else {
+                        User.updateOne({ _id: req.params.id }, { 
+                            email: userObject.email,
+                            password: userObject.password,
+                            family_name: userObject.family_name,
+                            given_name: userObject.given_name,
+                            token: userObject.token,
+                            domain: userObject.domain,
+                            roles: userObject.roles
+                        })
+                            .then((user) => res.status(200).json({message : 'User modifié', user: user}))
+                            .catch(error => res.status(400).json({ error }));
+                    }
+                })
+                .catch()
+
+
         })
         .catch(error => res.status(500).json({ error }));
 };
@@ -46,9 +70,14 @@ exports.modifyUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     User.findOne({ _id: req.params.id })
         .then(user => {
-            User.deleteOne({ _id: req.params.id })
-                .then(() => res.status(200).json({message : 'User supprimé'}))
-                .catch(error => res.status(400).json({ error }));
+            console.log(user);
+            if (user !== null) {
+                User.deleteOne({ _id: req.params.id })
+                    .then(() => res.status(200).json({message : 'User supprimé'}))
+                    .catch(error => res.status(400).json({ error }));
+            } else {
+                return res.status(400).json({ message: 'user non trouvé' })
+            }
         })
         .catch(error => res.status(500).json({ error }));
 };
