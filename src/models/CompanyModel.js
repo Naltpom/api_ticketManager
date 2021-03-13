@@ -1,3 +1,4 @@
+require('babel-register');
 const mongoose = require('mongoose');
 
 const Company = mongoose.model(

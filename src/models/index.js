@@ -3,4 +3,4 @@ module.exports = {
     Application: require("./ApplicationModel"),
     Company: require("./CompanyModel"),
     User: require("./UserModel")
-  };
+};
