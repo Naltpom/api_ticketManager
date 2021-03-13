@@ -1,0 +1,49 @@
+
+user.save()
+    .then(() => console.log('user enregistré !'))
+    .catch(error => console.log('Objet error !'));
+    // console.log(company);
+company.save()
+    .then((app) => {
+    // console.log(app);
+    application.company_id = new mongoose.Types.ObjectId(app._id)
+    // console.log(application);
+    console.log('company enregistré !')
+    application.save()
+        .then(() => {
+            console.log('application enregistré !')
+            db.Application.find()
+                .then(app => console.log(app))
+                .catch(error => console.log('app list error !'))
+            db.User.find()
+                .then(app => console.log(app))
+                .catch(error => console.log('app list error !'))
+            db.Company.find()
+                .then(app => console.log(app))
+                .catch(error => console.log('app list error !'))
+        })
+        .catch(error => console.log('Objet error !'))
+    })
+    .catch(error => console.log('Objet error !'))
+
+
+
+const user = new db.User({
+  email: 'test@test.test',
+  password: 'password',
+  family_name: 'john',
+  given_name: 'doe',
+  token: 'toekn',
+  domain: 'doamin',
+  roles: 'roles'
+});
+
+const company = new db.Company({
+  name: 'this is the company name',
+  slug: 'slug'
+});
+
+const application = new db.Application({
+  company_id: '604bf3db6e5c9e730e08ab38',
+  name: 'name of the application'
+})
