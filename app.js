@@ -23,6 +23,9 @@ const companyRoute = require('./src/routes/CompanyRoute');
 app.use('/api/companies', companyRoute);
 
 
+const applicationRoute = require('./src/routes/ApplicationRoute');
+app.use('/api/applications', applicationRoute);
+
 
 
 

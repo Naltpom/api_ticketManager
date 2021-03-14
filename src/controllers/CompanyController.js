@@ -49,13 +49,13 @@ exports.deleteCompany = (req, res, next) => {
                 return res.status(404).json({ message: 'Company non trouvé' })
             }
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ message: 'company not found :' + error }));
 };
 
 exports.getOneCompany = (req, res, next) => {
     Company.findOne({ _id: req.params.id })
         .then(company => res.status(200).json(company))
-        .catch(error => res.status(404).json({ error }));
+        .catch(error => res.status(404).json({ message: 'company not found :' + error }));
 };
 
 exports.getAllCompanies = (req, res, next) => {
