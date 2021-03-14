@@ -6,6 +6,12 @@
             "db": {
                 "username": "",
                 "password": ""
+            },
+            "mail": {
+                "host" : "ssl0.ovh.net",
+                "port" : 587,
+                "user" : "ticket-manager@naltpom.fr",
+                "pass" : "ticket-manager"
             }
         },
         "test": {
