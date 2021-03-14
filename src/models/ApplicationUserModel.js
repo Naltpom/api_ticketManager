@@ -15,6 +15,20 @@ const ApplicationUser = mongoose.model(
             required: true
         },
         roles: { type : String, required: true},
+        created_by: { 
+            type : mongoose.Schema.Types.ObjectId,
+            ref:'User', 
+        },
+        update_by: { 
+            type : mongoose.Schema.Types.ObjectId,
+            ref:'User', 
+        },
+        created_at: { 
+            type : Date, 
+        },
+        update_at: { 
+            type : Date, 
+        },
     })
 );
 
