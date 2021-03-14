@@ -8,6 +8,7 @@ exports.createUser = (req, res, next) => {
     bcrypt.hash(userObject.password, 10)
         .then(hash => {
             const user = new User({
+                companies_id: [],
                 email: userObject.email,
                 password: hash,
                 family_name: userObject.family_name,
@@ -38,6 +39,7 @@ exports.modifyUser = (req, res, next) => {
                         console.log('not valid');
                         var newPasssword = bcrypt.hash(userObject.password, 10).then(password => {
                             User.updateOne({ _id: req.params.id }, { 
+                                companies_id: [],
                                 email: userObject.email,
                                 password: password,
                                 family_name: userObject.family_name,
@@ -56,6 +58,7 @@ exports.modifyUser = (req, res, next) => {
                         console.log(newPasssword);
                     } else {
                         User.updateOne({ _id: req.params.id }, { 
+                            companies_id: [],
                             email: userObject.email,
                             password: userObject.password,
                             family_name: userObject.family_name,
