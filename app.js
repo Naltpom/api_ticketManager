@@ -1,8 +1,9 @@
+require('babel-register');
 const express = require('express');
 const bodyParser = require('body-parser');
+const mailerService = require('./src/services/MailerService');
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
-
 const path = require('path');
 
 const app = express();
@@ -21,5 +22,13 @@ app.use('/api/users', userRoute);
 const companyRoute = require('./src/routes/CompanyRoute');
 app.use('/api/companies', companyRoute);
 
+
+
+
+
+const nodemailer = require("nodemailer");
+
+
+app.post('/send/mail', mailerService);
 
 module.exports = app;
