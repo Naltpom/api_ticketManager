@@ -22,9 +22,11 @@ app.use('/api/users', userRoute);
 const companyRoute = require('./src/routes/CompanyRoute');
 app.use('/api/companies', companyRoute);
 
-
 const applicationRoute = require('./src/routes/ApplicationRoute');
 app.use('/api/applications', applicationRoute);
+
+const applicationUser = require('./src/routes/ApplicationUserRoute');
+app.use('/api/application_user', applicationUser);
 
 
 
