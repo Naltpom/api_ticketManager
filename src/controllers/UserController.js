@@ -14,7 +14,11 @@ exports.createUser = (req, res, next) => {
                 given_name: userObject.given_name,
                 token: userObject.token,
                 domain: userObject.domain,
-                roles: userObject.roles
+                roles: userObject.roles,
+                created_by: null,
+                update_by: null,
+                created_at: Date.now(),
+                update_at: Date.now(),
             });
             user.save()
                 .then((user) => res.status(201).json({ message: 'User crée !', user: user}))
@@ -40,7 +44,11 @@ exports.modifyUser = (req, res, next) => {
                                 given_name: userObject.given_name,
                                 token: userObject.token,
                                 domain: userObject.domain,
-                                roles: userObject.roles
+                                roles: userObject.roles,
+                                created_by: null,
+                                update_by: null,
+                                created_at: user.created_at,
+                                update_at: Date.now(),
                             })
                                 .then((user) => res.status(200).json({message : 'User modifié', user: user}))
                                 .catch(error => res.status(400).json({ error }));
@@ -54,7 +62,11 @@ exports.modifyUser = (req, res, next) => {
                             given_name: userObject.given_name,
                             token: userObject.token,
                             domain: userObject.domain,
-                            roles: userObject.roles
+                            roles: userObject.roles,
+                            created_by: null,
+                            update_by: null,
+                            created_at: user.created_at,
+                            update_at: Date.now(),
                         })
                             .then((user) => res.status(200).json({message : 'User modifié', user: user}))
                             .catch(error => res.status(400).json({ error }));

@@ -7,6 +7,20 @@ const Company = mongoose.model(
     mongoose.Schema({
         name: { type : String, required: true},
         slug: { type : String, unique: true},
+        created_by: { 
+            type : mongoose.Schema.Types.ObjectId,
+            ref:'User', 
+        },
+        update_by: { 
+            type : mongoose.Schema.Types.ObjectId,
+            ref:'User', 
+        },
+        created_at: { 
+            type : Date, 
+        },
+        update_at: { 
+            type : Date, 
+        },
     }).plugin(uniqueValidator)
 );
 
