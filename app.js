@@ -13,24 +13,23 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
 app.use(bodyParser.json());
 
+const auth = require('./src/middleware/auth');
+const userController = require('./src/controllers/UserController');
+app.post('/auth', userController.login);
+
 const userRoute = require('./src/routes/UserRoute');
-app.use('/api/users', userRoute);
+app.use('/api/users', auth, userRoute);
 
 const companyRoute = require('./src/routes/CompanyRoute');
-app.use('/api/companies', companyRoute);
-
+app.use('/api/companies', auth, companyRoute);
 
 const applicationRoute = require('./src/routes/ApplicationRoute');
-app.use('/api/applications', applicationRoute);
+app.use('/api/applications', auth, applicationRoute);
 
-
-
-
-const nodemailer = require("nodemailer");
-
+const applicationUser = require('./src/routes/ApplicationUserRoute');
+app.use('/api/application_user', auth, applicationUser);
 
 app.post('/send/mail', mailerService);
 

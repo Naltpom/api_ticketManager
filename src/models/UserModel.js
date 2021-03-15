@@ -12,6 +12,10 @@ const User = mongoose.model(
         token: {type : String, required: true},
         domain: {type : String, required: true},
         roles: {type : String, required: true},
+        companies_id: [{ 
+            type : mongoose.Schema.Types.ObjectId,
+            ref:'Company', 
+        }],
         created_by: { 
             type : mongoose.Schema.Types.ObjectId,
             ref:'User', 
