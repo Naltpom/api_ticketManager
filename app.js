@@ -25,11 +25,14 @@ app.use('/api/users', auth, userRoute);
 const companyRoute = require('./src/routes/CompanyRoute');
 app.use('/api/companies', auth, companyRoute);
 
+const companyUserRoute = require('./src/routes/CompanyUserRoute');
+app.use('/api/company_user', auth, companyUserRoute);
+
 const applicationRoute = require('./src/routes/ApplicationRoute');
 app.use('/api/applications', auth, applicationRoute);
 
-const applicationUser = require('./src/routes/ApplicationUserRoute');
-app.use('/api/application_user', auth, applicationUser);
+const applicationUserRoute = require('./src/routes/ApplicationUserRoute');
+app.use('/api/application_user', auth, applicationUserRoute);
 
 app.post('/send/mail', mailerService);
 

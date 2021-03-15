@@ -1,11 +1,11 @@
 require('babel-register');
-const ApplicationUser = require('../models/ApplicationUserModel');
+const CompanyUser = require('../models/CompanyUserModel');
 
 const User = require('../models/UserModel');
-const Application = require('../models/ApplicationModel');
+const Company = require('../models/CompanyModel');
 
-exports.createApplicationUser = (req, res, next) => {
-    const companyUserObject = req.body.applicationUser;
+exports.createCompanyUser = (req, res, next) => {
+    const companyUserObject = req.body.companyUser;
 
     const user = User.findOne({_id: companyUserObject.user_id})
         .then(user => {
@@ -16,29 +16,29 @@ exports.createApplicationUser = (req, res, next) => {
         })
         .catch(error => res.status(400).json({ message: "id invalide", error: error }))
 
-    const application = Application.findOne({_id: companyUserObject.application_id})
-        .then(application => {
-            if (!application) {
-                return res.status(401).json({ error2: 'Application non trouvé !' });
+    const company = Company.findOne({_id: companyUserObject.company_id})
+        .then(company => {
+            if (!company) {
+                return res.status(401).json({ error2: 'Company non trouvé !' });
             } 
-            return application
+            return company
         })
         .catch(error => res.status(400).json({ error }))
 
 
-    Promise.all([user, application])
+    Promise.all([user, company])
         .then(data => {
             dataUser = data[0];
-            dataApplication = data[1];
-            if (dataUser instanceof User && dataApplication instanceof Application) {
-                ApplicationUser.findOne({user_id: dataUser._id,application_id: dataApplication._id})
+            dataCompany = data[1];
+            if (dataUser instanceof User && dataCompany instanceof Company) {
+                CompanyUser.findOne({user_id: dataUser._id,company_id: dataCompany._id})
                     .then(app => {
                         console.log(app);
                         if (app === [] || app === null) {
                             
-                            const company = new ApplicationUser({
+                            const company = new CompanyUser({
                                 user_id: dataUser._id,
-                                application_id: dataApplication._id,
+                                company_id: dataCompany._id,
                                 roles: companyUserObject.roles,
                                 created_by: null,
                                 update_by: null,
@@ -47,7 +47,7 @@ exports.createApplicationUser = (req, res, next) => {
                             })
                 
                             company.save()
-                                .then((applicationUser) => res.status(201).json({ message: 'ApplicationUser crée !', applicationUser: applicationUser}))
+                                .then((companyUser) => res.status(201).json({ message: 'CompanyUser crée !', companyUser: companyUser}))
                                 .catch(error => res.status(400).json({ error }));
 
                         } else {
@@ -55,7 +55,7 @@ exports.createApplicationUser = (req, res, next) => {
                              * this sould edit existing one or not ?
                              * in the mean time we return error cause it exist
                              */
-                            return res.status(401).json({ error2: 'ApplicationUser deja existant' });
+                            return res.status(401).json({ error2: 'CompanyUser deja existant' });
                         }
 
                     })
@@ -68,8 +68,8 @@ exports.createApplicationUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-exports.modifyApplicationUser = (req, res, next) => {
-    const companyUserObject = req.body.applicationUser;
+exports.modifyCompanyUser = (req, res, next) => {
+    const companyUserObject = req.body.companyUser;
 
     const user = User.findOne({_id: companyUserObject.user_id})
         .then(user => {
@@ -80,37 +80,37 @@ exports.modifyApplicationUser = (req, res, next) => {
         })
         .catch(error => res.status(400).json({ message: "id invalide", error: error }))
 
-    const application = Application.findOne({_id: companyUserObject.application_id})
-        .then(application => {
-            if (!application) {
-                return res.status(401).json({ error2: 'Application non trouvé !' });
+    const company = Company.findOne({_id: companyUserObject.company_id})
+        .then(company => {
+            if (!company) {
+                return res.status(401).json({ error2: 'Company non trouvé !' });
             } 
-            return application
+            return company
         })
         .catch(error => res.status(400).json({ error }))
 
 
-    Promise.all([user, application])
+    Promise.all([user, company])
         .then(data => {
             dataUser = data[0];
-            dataApplication = data[1];
-            if (dataUser instanceof User && dataApplication instanceof Application) {
-                ApplicationUser.findOne({user_id: dataUser._id,application_id: dataApplication._id})
+            dataCompany = data[1];
+            if (dataUser instanceof User && dataCompany instanceof Company) {
+                CompanyUser.findOne({user_id: dataUser._id,company_id: dataCompany._id})
                     .then(app => {
                         if (app !== []) {
-                            ApplicationUser.updateOne({}, {
+                            CompanyUser.updateOne({}, {
                                 user_id: dataUser._id,
-                                application_id: dataApplication._id,
+                                company_id: dataCompany._id,
                                 roles: companyUserObject.roles,
                                 created_by: null,
                                 update_by: null,
                                 created_at: app.created_at,
                                 update_at: Date.now(),
                             })
-                                .then((applicationUser) => res.status(201).json({ message: 'ApplicationUser modifié !', applicationUser: applicationUser}))
+                                .then((companyUser) => res.status(201).json({ message: 'CompanyUser modifié !', companyUser: companyUser}))
                                 .catch(error => res.status(400).json({ error }));
                         } else {
-                            return res.status(401).json({ error2: 'ApplicationUser non trouvé !' });
+                            return res.status(401).json({ error2: 'CompanyUser non trouvé !' });
                         }
                     })
                     .catch()
@@ -119,28 +119,28 @@ exports.modifyApplicationUser = (req, res, next) => {
         .catch(error => res.status(400).json({ error }))
 };
 
-exports.deleteApplicationUser = (req, res, next) => {
-    ApplicationUser.findOne({ _id: req.params.id })
-        .then(applicationUser => {
-            if (applicationUser !== null) {
-                ApplicationUser.deleteOne({ _id: req.params.id })
-                    .then(() => res.status(200).json({message : 'ApplicationUser supprimé'}))
+exports.deleteCompanyUser = (req, res, next) => {
+    CompanyUser.findOne({ _id: req.params.id })
+        .then(companyUser => {
+            if (companyUser !== null) {
+                CompanyUser.deleteOne({ _id: req.params.id })
+                    .then(() => res.status(200).json({message : 'CompanyUser supprimé'}))
                     .catch(error => res.status(400).json({ error }));
             } else {
-                return res.status(404).json({ message: 'ApplicationUser non trouvé' })
+                return res.status(404).json({ message: 'CompanyUser non trouvé' })
             }
         })
         .catch(error => res.status(500).json({ error }));
 };
 
-exports.getOneApplicationUser = (req, res, next) => {
-    ApplicationUser.findOne({ _id: req.params.id })
-        .then(applicationUser => res.status(200).json(applicationUser))
+exports.getOneCompanyUser = (req, res, next) => {
+    CompanyUser.findOne({ _id: req.params.id })
+        .then(companyUser => res.status(200).json(companyUser))
         .catch(error => res.status(404).json({ error }));
 };
 
-exports.getAllApplicationUsers = (req, res, next) => {
-    ApplicationUser.find()
-        .then(applicationUser => res.status(200).json(applicationUser))
+exports.getAllCompanyUsers = (req, res, next) => {
+    CompanyUser.find()
+        .then(companyUser => res.status(200).json(companyUser))
         .catch(error => res.status(400).json({ error }));
 };
