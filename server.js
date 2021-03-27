@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const { json } = require('body-parser');
 
 mongoose
-  .connect("mongodb+srv://root:root@cluster0.keede.mongodb.net/tickettest?retryWrites=true&w=majority", {
+  .connect("mongodb+srv://:@cluster0.keede.mongodb.net/tickettest?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
