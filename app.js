@@ -1,5 +1,10 @@
 require('babel-register');
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./public/swagger.json');
+
+// const expressOasGenerator = require('express-oas-generator');
+
 const bodyParser = require('body-parser');
 const mailerService = require('./src/services/MailerService');
 const mongoose = require('mongoose');
@@ -7,6 +12,9 @@ mongoose.set('useCreateIndex', true);
 const path = require('path');
 
 const app = express();
+
+// expressOasGenerator.init(app, {});
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -14,6 +22,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use(bodyParser.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const auth = require('./src/middleware/auth');
 const userController = require('./src/controllers/UserController');

@@ -1,0 +1,410 @@
+{
+    "definitions": {},
+    "info": {
+      "title": "api_ticketmanager",
+      "version": "1.0.0",
+      "license": {
+        "name": "ISC"
+      },
+      "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3)."
+    },
+    "basePath": "/api/v1/",
+    "host": "localhost:3000",
+    "tags": [
+        {
+            "name": "users",
+            "description": "Methodes permettant de gérer les Users"
+        },
+        {
+            "name": "companies",
+            "description": "Methodes permettant de gérer les Companies"
+        },
+        {
+            "name": "company_user",
+            "description": "Methodes permettant de gérer les Company_User"
+        },
+        {
+            "name": "applications",
+            "description": "Methodes permettant de gérer les Application"
+        },
+        {
+            "name": "application_user",
+            "description": "Methodes permettant de gérer les Application_User"
+        },
+        {
+            "name": "services",
+            "description": "Methodes permettant de gérer les services"
+        }
+    ],
+    "paths": {
+      "/auth": {
+        "post": {
+          "summary": "auth",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "body",
+              "required": true
+            },
+            {
+              "name": "password",
+              "in": "body",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["services"]
+        }
+      },
+      "/users": {
+        "get": {
+          "summary": "users",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["users"]
+        },
+        "post": {
+          "summary": "users",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["users"]
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "summary": "users/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["users"]
+        },
+        "put": {
+          "summary": "users/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["users"]
+        },
+        "delete": {
+          "summary": "users/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["users"]
+        }
+      },
+      "/companies": {
+        "get": {
+          "summary": "companies",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["companies"]
+        },
+        "post": {
+          "summary": "companies",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["companies"]
+        }
+      },
+      "/companies/{id}": {
+        "get": {
+          "summary": "companies/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["companies"]
+        },
+        "put": {
+          "summary": "companies/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["companies"]
+        },
+        "delete": {
+          "summary": "companies/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["companies"]
+        }
+      },
+      "/company_user": {
+        "get": {
+          "summary": "company_user",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["company_user"]
+        },
+        "post": {
+          "summary": "company_user",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["company_user"]
+        }
+      },
+      "/company_user/{id}": {
+        "get": {
+          "summary": "company_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["company_user"]
+        },
+        "put": {
+          "summary": "company_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["company_user"]
+        },
+        "delete": {
+          "summary": "company_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["company_user"]
+        }
+      },
+      "/applications": {
+        "get": {
+          "summary": "applications",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["applications"]
+        },
+        "post": {
+          "summary": "applications",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["applications"]
+        }
+      },
+      "/applications/{id}": {
+        "get": {
+          "summary": "applications/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["applications"]
+        },
+        "put": {
+          "summary": "applications/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["applications"]
+        },
+        "delete": {
+          "summary": "applications/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["applications"]
+        }
+      },
+      "/application_user": {
+        "get": {
+          "summary": "application_user",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["application_user"]
+        },
+        "post": {
+          "summary": "application_user",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["application_user"]
+        }
+      },
+      "/application_user/{id}": {
+        "get": {
+          "summary": "application_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["application_user"]
+        },
+        "put": {
+          "summary": "application_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["application_user"]
+        },
+        "delete": {
+          "summary": "application_user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["application_user"]
+        }
+      },
+      "/send/mail": {
+        "post": {
+          "summary": "/send/mail",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["services"]
+        }
+      }
+    },
+    "swagger": "2.0"
+  }
